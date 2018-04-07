@@ -4,6 +4,7 @@
   "description": "A REST API for HookUp",
   "main": "index.js",
   "scripts": {
+    "start": "npm install; node index.js",
     "test": "mocha test/acceptance"
   },
   "repository": {

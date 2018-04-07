@@ -1,4 +1,4 @@
-People = [
+const People = [
     {
         name: "Old Timer",
         password: "",
@@ -8,13 +8,10 @@ People = [
         numberOfTrips: Number,
         created: Date
     }
-]
+];
+
+const Trips = [];
 
 
-const Fixtures = {
-    people: People,
-    trips: Trips,
-    tripLists: TripLists
-};
-
-export default Fixtures;
+module.exports.testPeople = People,
+module.exports.testTrips = Trips

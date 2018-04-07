@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-import Fixtures from './fixtures'
+const mongoose = require('mongoose');
+const { testPeople, testTrips, testTripLists } = require('./fixtures');
 
-mongoose.connect('mongodb://admin:b1af6d7d0c16@ds237979.mlab.com/hookup');
+mongoose.connect('mongodb://admin:b1af6d7d0c16@ds237979.mlab.com:37979/hookup');
 
 const Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
 
@@ -19,18 +19,12 @@ const TripSchema = new Schema({
     start: Date,
     end: Date,
     name: String,
-    location: String
-});
-
-
-const TripListSchema = new Schema({
-    tripId: ObjectId,
+    location: String,
     people: Array
 });
 
 const Person = mongoose.model('Person', PersonSchema);
 const Trip = mongoose.model('Trip', TripSchema);
-const TripList = mongoose.model('TripList', TripListSchema);
 
-
-export { Person, Trip, TripList };
+module.exports.Person = Person;
+module.exports.Trip = Trip;
