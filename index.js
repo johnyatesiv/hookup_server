@@ -3,7 +3,8 @@ const app = express();
 
 /** Dependencies **/
 const crypto = require("crypto");
-const { Person, Trip, TripList } = require("./db/db.js");
+const { Person, Trip } = require("./db/db.js");
+const fixtures = require("./db/fixtures.js");
 
 /** Config and Globals **/
 
@@ -19,8 +20,8 @@ app.post('/register', (req, res) => {
 
 });
 
-app.post('/login', (req, res) => {
-
+app.post('/authenticate', (req, res) => {
+	res.json({error: false, message: "Logged in."});
 });
 
 /** Rest API **/
@@ -77,13 +78,16 @@ app.delete('/api/v1/people', (req, res) => {
 
 /** Trips REST **/
 app.get('/api/v1/trips', (req, res) => {
-    Trip.find(req.body, function (err, docs) {
-        if(err) {
-            res.json({error: true, message: err}).end();
-        } else {
-            res.json(docs).end();
-        }
-    });
+	res.json({error: false, message: "", payload: fixtures.testTrips});
+    res.end();
+
+    //Trip.find(req.body, function (err, docs) {
+    //    if(err) {
+    //        res.json({error: true, message: err}).end();
+    //    } else {
+    //        res.json(docs).end();
+    //    }
+    //});
 });
 
 app.post('/api/v1/trips', (req, res) => {
