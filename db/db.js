@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { testPeople, testTrips, testTripLists } = require('./fixtures');
+const { testPeople, testTrips } = require('./fixtures');
 
 mongoose.connect('mongodb://admin:b1af6d7d0c16@ds237979.mlab.com:37979/hookup');
 
@@ -9,11 +9,9 @@ const PersonSchema = new Schema({
     name: String,
     email: String,
     password: String,
-    drinkLevel: {type: Number, default: 0},
-    smokeLevel: {type: Number, default: 0},
-    noiseLevel: {type: Number, default: 0},
-    numberOfTrips: {type: Number, default: 0},
-    created: {type: Date, default: new Date()}
+    drink: {type: Number, default: 0},
+    smoke: {type: Number, default: 0},
+    noise: {type: Number, default: 0},
 });
 
 const TripSchema = new Schema({
@@ -21,11 +19,44 @@ const TripSchema = new Schema({
     end: Date,
     name: String,
     location: String,
-    people: Array
+    boat: String,
+    //people: Array
 });
 
 const Person = mongoose.model('Person', PersonSchema);
 const Trip = mongoose.model('Trip', TripSchema);
+
+insertFixtureTrip = (trip) => {
+    Trip.find(trip, function(err, docs) {
+        if(err) {
+            console.log(err);
+        } else {
+            if(docs.length == 0) {
+                Trip.create(trip);
+            }
+        }
+    });
+};
+
+insertFixturePerson = (person) => {
+    Person.find(person, function(err, docs) {
+        if(err) {
+            console.log(err);
+        } else {
+            if(docs.length == 0) {
+                Person.create(person);
+            }
+        }
+    });
+};
+
+//testTrips.forEach(function(trip) {
+//    insertFixtureTrip(trip);
+//});
+//
+//testPeople.forEach(function(person) {
+//    insertFixturePerson(person);
+//});
 
 module.exports.Person = Person;
 module.exports.Trip = Trip;

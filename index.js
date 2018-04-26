@@ -78,16 +78,13 @@ app.delete('/api/v1/people', (req, res) => {
 
 /** Trips REST **/
 app.get('/api/v1/trips', (req, res) => {
-	res.json({error: false, message: "", payload: fixtures.testTrips});
-    res.end();
-
-    //Trip.find(req.body, function (err, docs) {
-    //    if(err) {
-    //        res.json({error: true, message: err}).end();
-    //    } else {
-    //        res.json(docs).end();
-    //    }
-    //});
+    Trip.find(req.body, function (err, docs) {
+        if(err) {
+            res.json({error: true, message: err}).end();
+        } else {
+            res.json({error: false, message: "Found Trips", payload: docs}).end();
+        }
+    });
 });
 
 app.post('/api/v1/trips', (req, res) => {
