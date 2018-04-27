@@ -1,18 +1,15 @@
-const { Person, Trip } = require("./db.js");
-
-const People = [
+module.exports.testUsers = [
     {
-        name: "Old Timer",
-        password: "",
-        drinkLevel: Number,
-        smokeLevel: Number,
-        noiseLevel: Number,
-        numberOfTrips: Number,
-        created: Date
+        email: "test@test.net",
+        password: "test1234",
+        drink: 1,
+        smoke: 1,
+        weed: 1,
+        noiseLevel: 0
     }
 ];
 
-const Trips = [
+module.exports.testTrips = [
     {
         name: "Mission Bay 2 Hour Trip",
         location: "Mission Bay",
@@ -32,6 +29,3 @@ const Trips = [
         //people: [{name: "test guy"}]
     }
 ];
-
-module.exports.testPeople = People;
-module.exports.testTrips = Trips;
