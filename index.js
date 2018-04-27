@@ -110,6 +110,6 @@ app.delete('/api/v1/trips', (req, res) => {
 
 });
 
-app.listen(3000, () => {
-    console.log('HookUp server ready to go on port 3000!')
+app.listen(8080, () => {
+    console.log('HookUp server ready to go on port 8080!')
 });
