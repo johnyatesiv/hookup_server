@@ -89,14 +89,17 @@ app.get('/api/v1/trips', (req, res) => {
 app.post('/api/v1/trips', (req, res) => {
     Trip.find(req.body, function(err, docs) {
         if(err) {
-            res.json({error: true, message: unknownErrorMessage}).end();
+            res.json({error: true, message: unknownErrorMessage});
+            res.end();
         } else {
             if(docs.length > 0) {
-                res.json({error: true, message: "Record already exists."}).end();
+                res.json({error: true, message: "Record already exists."});
+                res.end();
             } else {
                 const instance = new Trip(req.body);
                 instance.save();
-                res.json({error: false, message: instance}).end();
+                res.json({error: false, message: "Trip created."});
+                res.end();
             }
         }
     });
