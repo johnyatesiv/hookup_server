@@ -28,7 +28,10 @@ app.use(express.urlencoded());
 const unknownErrorMessage = "An error occurred.";
 
 /** Core Stuff **/
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => {
+    res.json({error: false, message: 'Hello World!'});
+    res.end();
+});
 
 app.post('/register', (req, res) => {
     req.body.password = sha512(req.body.password, salt);
@@ -48,11 +51,7 @@ app.post('/authenticate', (req, res) => {
     const hashed = sha512(req.body.password, salt);
     const query = {email: req.body.email.toLowerCase(), password: hashed};
 
-    console.dir(query);
-
     User.find(query, function(err, docs) {
-        console.log(err);
-        console.log(docs);
         if(err || docs.length == 0) {
             res.json({error: true, message: "Failed to log in."});
             res.end();
@@ -106,11 +105,11 @@ app.post('/api/v1/trips', (req, res) => {
 });
 
 app.put('/api/v1/trips', (req, res) => {
-
+    res.send(false);
 });
 
 app.delete('/api/v1/trips', (req, res) => {
-
+    res.send(false);
 });
 
 app.listen(process.env.PORT || 3000, () => {
